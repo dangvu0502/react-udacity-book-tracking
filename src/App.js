@@ -55,6 +55,7 @@ class BooksApp extends React.Component {
                   <div className="bookshelf-books">
                     <ol className="books-grid">
                       <li>
+{/*------------------------------------------------------------------  SOMETHING WRONG HERE ------------------------------------------------------------------*/ }
                          <Book key={this.state.books[0].title} book={this.state.books[0]}/>
                       </li>
                       <li>
