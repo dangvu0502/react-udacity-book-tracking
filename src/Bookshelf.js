@@ -18,6 +18,7 @@ class Bookshelf extends Component {
         <h2 className="bookshelf-title">{this.state.title[this.props.type]}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
+            <li>
             {booksOnThisShelf.map((book) => (
               <Book
                 key={book.id}
@@ -25,6 +26,7 @@ class Bookshelf extends Component {
                 handleMove={this.props.handleMove}
               />
             ))}
+            </li>
           </ol>
         </div>
       </div>

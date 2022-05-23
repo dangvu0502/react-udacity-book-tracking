@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 import Book from "./Book";
 
 class SearchBooks extends Component {
-
   render() {
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
-{/* {-------------------------------- ERROR HERE -----------------------------------------------------------------   }  */}
-          {/* <Link to="/" className="close-search">
+          <Link to="/" className="close-search">
             Close
-          </Link> */}
+          </Link>
           <div className="search-books-input-wrapper">
             {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.

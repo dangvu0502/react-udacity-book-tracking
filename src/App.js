@@ -3,13 +3,13 @@ import * as BooksAPI from "./BooksAPI";
 import Bookshelf from "./Bookshelf";
 import SearchBooks from "./SearchBook";
 import "./App.css";
+import { Route, Link, Routes } from "react-router-dom";
 
 class BooksApp extends React.Component {
   state = {
     books: [],
     shelfTypes: ["currentlyReading", "wantToRead", "read"],
     bookShelves: {},
-    showSearchPage: false,
   };
 
   getAllBooks = () => {
@@ -46,52 +46,67 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks books={this.state.books} handleMove={this.handleMove} />
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <Bookshelf
-                  key={this.state.shelfTypes[0]}
+        <Routes>
+          <Route
+            exact
+            path="/search"
+            // render={() => (
+            //   <SearchBooks
+            //     books={this.state.books}
+            //     handleMove={this.handleMove}
+            //   />
+            // )}
+            element = {<SearchBooks
                   books={this.state.books}
-                  type={this.state.shelfTypes[0]}
-                  BookIDsOnThisShelf={
-                    this.state.bookShelves[this.state.shelfTypes[0]]
-                  }
                   handleMove={this.handleMove}
-                />
-                <Bookshelf
-                  key={this.state.shelfTypes[1]}
-                  books={this.state.books}
-                  type={this.state.shelfTypes[1]}
-                  BookIDsOnThisShelf={
-                    this.state.bookShelves[this.state.shelfTypes[1]]
-                  }
-                  handleMove={this.handleMove}
-                />
-                <Bookshelf
-                  key={this.state.shelfTypes[2]}
-                  books={this.state.books}
-                  type={this.state.shelfTypes[2]}
-                  BookIDsOnThisShelf={
-                    this.state.bookShelves[this.state.shelfTypes[2]]
-                  }
-                  handleMove={this.handleMove}
-                />
+                />}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <div className="list-books">
+                <div className="list-books-title">
+                  <h1>MyReads</h1>
+                </div>
+                <div className="list-books-content">
+                  <div>
+                    <Bookshelf
+                      key={this.state.shelfTypes[0]}
+                      books={this.state.books}
+                      type={this.state.shelfTypes[0]}
+                      BookIDsOnThisShelf={
+                        this.state.bookShelves[this.state.shelfTypes[0]]
+                      }
+                      handleMove={this.handleMove}
+                    />
+                    <Bookshelf
+                      key={this.state.shelfTypes[1]}
+                      books={this.state.books}
+                      type={this.state.shelfTypes[1]}
+                      BookIDsOnThisShelf={
+                        this.state.bookShelves[this.state.shelfTypes[1]]
+                      }
+                      handleMove={this.handleMove}
+                    />
+                    <Bookshelf
+                      key={this.state.shelfTypes[2]}
+                      books={this.state.books}
+                      type={this.state.shelfTypes[2]}
+                      BookIDsOnThisShelf={
+                        this.state.bookShelves[this.state.shelfTypes[2]]
+                      }
+                      handleMove={this.handleMove}
+                    />
+                  </div>
+                </div>
+                <Link to="/search" className="open-search">
+                  Add a book
+                </Link>
               </div>
-            </div>
-            <div className="open-search">
-              <button
-                onClick={() => this.setState({ showSearchPage: true })}>
-                Add a book
-              </button>
-            </div>
-          </div>
-        )}
+            )}
+          />
+        </Routes>
       </div>
     );
   }
