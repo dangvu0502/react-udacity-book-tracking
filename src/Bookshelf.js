@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Book from "./Book";
 
+
 class Bookshelf extends Component {
   state = {
     title: {
@@ -18,15 +19,17 @@ class Bookshelf extends Component {
         <h2 className="bookshelf-title">{this.state.title[this.props.type]}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            <li>
+
             {booksOnThisShelf.map((book) => (
+              <li>
               <Book
                 key={book.id}
                 book={book}
                 handleMove={this.props.handleMove}
               />
+              </li>
             ))}
-            </li>
+
           </ol>
         </div>
       </div>

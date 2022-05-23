@@ -50,22 +50,24 @@ class BooksApp extends React.Component {
           <Route
             exact
             path="/search"
-// {----------------------------SOMETHING WRONG HERE ----------------------------}            
+            // {----------------------------SOMETHING WRONG HERE ----------------------------}
             // render={() => (
             //   <SearchBooks
             //     books={this.state.books}
             //     handleMove={this.handleMove}
             //   />
             // )}
-            element = {<SearchBooks
-                  books={this.state.books}
-                  handleMove={this.handleMove}
-                />}
+            element={
+              <SearchBooks
+                books={this.state.books}
+                handleMove={this.handleMove}
+              />
+            }
           />
           <Route
             exact
             path="/"
-            render={() => (
+            element={
               <div className="list-books">
                 <div className="list-books-title">
                   <h1>MyReads</h1>
@@ -102,10 +104,10 @@ class BooksApp extends React.Component {
                   </div>
                 </div>
                 <Link to="/search" className="open-search">
-                  Add a book
+                  <button> Add a book </button>
                 </Link>
               </div>
-            )}
+            }
           />
         </Routes>
       </div>
