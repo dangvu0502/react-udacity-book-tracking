@@ -19,7 +19,7 @@ class BooksApp extends React.Component {
           .filter((book) => book.shelf === shelfType)
           .map((book) => book.id);
         return shelf;
-      },{});
+      }, {});
       this.setState({ books, bookShelves });
     });
   };
@@ -45,13 +45,9 @@ class BooksApp extends React.Component {
     }
 
     return (
-
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchBooks
-          books={this.state.books}
-          handleMove={this.handleMove}
-        />
+          <SearchBooks books={this.state.books} handleMove={this.handleMove} />
         ) : (
           <div className="list-books">
             <div className="list-books-title">
@@ -89,7 +85,8 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>
+              <button
+                onClick={() => this.setState({ showSearchPage: true })}>
                 Add a book
               </button>
             </div>
