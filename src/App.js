@@ -35,6 +35,13 @@ class BooksApp extends React.Component {
     });
   };
 
+  handleMoveWhenSearching = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf;
+      this.getAllBooks();
+    });
+  };
+
   render() {
     if (this.state.books.length === 0) {
       return (
@@ -50,17 +57,10 @@ class BooksApp extends React.Component {
           <Route
             exact
             path="/search"
-            // {----------------------------SOMETHING WRONG HERE ----------------------------}
-            // render={() => (
-            //   <SearchBooks
-            //     books={this.state.books}
-            //     handleMove={this.handleMove}
-            //   />
-            // )}
             element={
               <SearchBooks
                 books={this.state.books}
-                handleMove={this.handleMove}
+                handleMoveWhenSearching={this.handleMoveWhenSearching}
               />
             }
           />
