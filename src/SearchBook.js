@@ -10,7 +10,7 @@ class SearchBooks extends Component {
   }
 
   search = (searchTerm) => {
-    BooksAPI.search(searchTerm).then((books) => {
+    searchTerm && BooksAPI.search(searchTerm).then((books) => {
       this.setState({
         searchBooks: books === undefined || books.error ? [] : books
       });
