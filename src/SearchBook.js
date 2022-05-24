@@ -12,19 +12,20 @@ class SearchBooks extends Component {
   search = (searchTerm) => {
     BooksAPI.search(searchTerm).then((books) => {
       this.setState({
-        searchBooks: books === undefined ? [] : books
+        searchBooks: books === undefined || books.error ? [] : books
       });
     });
   }
 
   render() {
     // put book on right shelf
-    const searchBooksPuttedOnShelf = this.state.searchBooks.map((searchBook) => {
+    // if book haven't been not on shelf yet. 
+    // set book.shelf to none
+    const searchBooksOnRightShelf = this.state.searchBooks.map((searchBook) => {
       const intersectedBook = this.props.books.find((book) => {
         return book.id === searchBook.id;
       });
       searchBook.shelf = intersectedBook ? intersectedBook.shelf : 'none';
-
       return searchBook;
     });
 
@@ -53,8 +54,8 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {searchBooksPuttedOnShelf.map((book) => (
-              <li>
+          {searchBooksOnRightShelf.map((book,index) => (
+              <li key={`book-${index}`}>
               <Book
                 key={book.id}
                 book={book}

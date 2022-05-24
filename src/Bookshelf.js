@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Book from "./Book";
-
+import PropTypes from 'prop-types';
 
 class Bookshelf extends Component {
   state = {
@@ -20,8 +20,8 @@ class Bookshelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
 
-            {booksOnThisShelf.map((book) => (
-              <li>
+            {booksOnThisShelf.map((book,index) => (
+              <li key={`book-${index}`}>
               <Book
                 key={book.id}
                 book={book}
@@ -35,6 +35,10 @@ class Bookshelf extends Component {
       </div>
     );
   }
+}
+
+Bookshelf.PropTypes = {
+    books: PropTypes.array.isRequired
 }
 
 export default Bookshelf;

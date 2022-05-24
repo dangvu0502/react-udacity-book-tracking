@@ -17,7 +17,7 @@ class Book extends Component {
             />
           ) : (
             <div>
-              <p>Image Error</p>
+              <p>No Image</p>
             </div>
           )}
           <div className="book-shelf-changer">
