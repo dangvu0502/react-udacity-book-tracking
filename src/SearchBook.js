@@ -1,34 +1,36 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as BooksAPI from './BooksAPI';
+import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 
 class SearchBooks extends Component {
-
   state = {
-    searchBooks: []
-  }
+    searchBooks: [],
+  };
 
   search = (searchTerm) => {
-    searchTerm && BooksAPI.search(searchTerm).then((books) => {
-      this.setState({
-        searchBooks: books === undefined || books.error ? [] : books
+    if (searchTerm) {
+      BooksAPI.search(searchTerm).then((books) => {
+        this.setState({
+          searchBooks: books === undefined || books.error ? [] : books,
+        });
       });
-    });
-  }
+    } else {
+      this.setState({ searchBooks: [] });
+    }
+  };
 
   render() {
     // put book on right shelf
-    // if book haven't been not on shelf yet. 
+    // if book haven't been not on shelf yet.
     // set book.shelf to none
     const searchBooksOnRightShelf = this.state.searchBooks.map((searchBook) => {
       const intersectedBook = this.props.books.find((book) => {
         return book.id === searchBook.id;
       });
-      searchBook.shelf = intersectedBook ? intersectedBook.shelf : 'none';
+      searchBook.shelf = intersectedBook ? intersectedBook.shelf : "none";
       return searchBook;
     });
-
 
     return (
       <div className="search-books">
@@ -54,13 +56,13 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {searchBooksOnRightShelf.map((book,index) => (
+            {searchBooksOnRightShelf.map((book, index) => (
               <li key={`book-${index}`}>
-              <Book
-                key={book.id}
-                book={book}
-                handleMove={this.props.handleMoveWhenSearching}
-              />
+                <Book
+                  key={book.id}
+                  book={book}
+                  handleMove={this.props.handleMoveWhenSearching}
+                />
               </li>
             ))}
           </ol>
